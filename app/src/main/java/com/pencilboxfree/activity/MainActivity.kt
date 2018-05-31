@@ -1,7 +1,8 @@
-package com.pencilboxfree
+package com.pencilboxfree.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.pencilboxfree.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
