@@ -2,8 +2,9 @@ package com.pencilboxfree.drawmodel
 
 import android.graphics.Bitmap
 import com.pencilboxfree.interfaces.LayerInterface
+import com.pencilboxfree.interfaces.LayersManagerInterface
 
-class Layer constructor(layersManager: LayersManager, name: String, width: Int, height: Int, index: Int): LayerInterface{
+class Layer constructor(layersManager: LayersManagerInterface, name: String, width: Int, height: Int, index: Int): LayerInterface{
     private var _name: String = ""
     override var name: String
         get() {
@@ -19,11 +20,28 @@ class Layer constructor(layersManager: LayersManager, name: String, width: Int, 
 
     private var _index: Int = 0
     override var index: Int
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-        set(value) {}
+        get() {
+            synchronized(this) {
+                return _index
+            }
+        }
+        set(value) {
+            synchronized(this) {
+                _index = value
+            }
+        }
+    private var _visible = true
     override var visible: Boolean
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-        set(value) {}
+        get() {
+            synchronized(this) {
+                return _visible
+            }
+        }
+        set(value) {
+            synchronized(this) {
+                _visible = value
+            }
+        }
 
     companion object {
         fun create(
@@ -34,7 +52,7 @@ class Layer constructor(layersManager: LayersManager, name: String, width: Int, 
                 index: Int): Layer = Layer(layersManager, name, width, height, index)
     }
 
-    val layersManager: LayersManager
+    val layersManager: LayersManagerInterface
     val width: Int
     val height: Int
 
@@ -54,7 +72,9 @@ class Layer constructor(layersManager: LayersManager, name: String, width: Int, 
     }
 
     override fun recycle() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (!bitmap.isRecycled()) {
+            bitmap.recycle()
+        }
     }
 
     public override fun storeLayer() {
