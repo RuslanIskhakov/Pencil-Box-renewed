@@ -9,31 +9,13 @@ import com.pencilboxfree.interfaces.StorageHelperInterface
 class LayersManager constructor(width: Int, height: Int, storageHelper: StorageHelperInterface)
     : LayersManagerInterface {
 
-    private var _backgroundColor = Color.WHITE
-    override var backgroundColor: Int
-        get() {
-            synchronized(this) {
-                return _backgroundColor
-            }
-        }
-        set(value) {
-            synchronized(this) {
-                _backgroundColor = backgroundColor
-            }
-        }
+    override var backgroundColor: Int = Color.WHITE
+        @Synchronized get
+        @Synchronized set
 
-    private var _activeLayerIndex = 0
-    override var activeLayerIndex: Int
-        get() {
-            synchronized(this) {
-                return _activeLayerIndex
-            }
-        }
-        set(value) {
-            synchronized(this) {
-                _activeLayerIndex = value
-            }
-        }
+    override var activeLayerIndex: Int = 0
+        @Synchronized get
+        @Synchronized set
 
     val width: Int
     val height: Int
