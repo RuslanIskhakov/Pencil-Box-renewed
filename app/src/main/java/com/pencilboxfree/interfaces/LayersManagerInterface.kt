@@ -5,6 +5,7 @@ import android.graphics.Color
 import com.pencilboxfree.drawmodel.LayerInfo
 
 interface LayersManagerInterface {
+    val storageHelper: StorageHelperInterface
     var activeLayerIndex: Int
     var backgroundColor: Int
     fun addLayer(layerName: String, atIndex: Int): Boolean

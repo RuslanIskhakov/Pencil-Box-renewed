@@ -9,6 +9,8 @@ import com.pencilboxfree.interfaces.StorageHelperInterface
 class LayersManager constructor(width: Int, height: Int, storageHelper: StorageHelperInterface)
     : LayersManagerInterface {
 
+    override val storageHelper: StorageHelperInterface
+
     override var backgroundColor: Int = Color.WHITE
         @Synchronized get
         @Synchronized set
@@ -19,7 +21,6 @@ class LayersManager constructor(width: Int, height: Int, storageHelper: StorageH
 
     val width: Int
     val height: Int
-    val storageHelper: StorageHelperInterface
 
     val layers: HashMap<String, LayerInterface> = HashMap()
 

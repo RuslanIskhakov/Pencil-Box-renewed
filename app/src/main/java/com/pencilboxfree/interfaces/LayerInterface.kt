@@ -13,4 +13,5 @@ interface LayerInterface {
     fun recycle()
     fun getInfo(): LayerInfo
     fun isRecycled(): Boolean
+    fun compressBitmap(filePath: String): Boolean
 }
